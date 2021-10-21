@@ -1,28 +1,21 @@
-function padString(userString = "", stringLength, char, isAddChar = true) {
-  if (userString === null || userString === "") {
-    return console.log(`The string is not defined or it is empty.`);
+function padString(userString, stringLength, char, isAddChar = true) {
+  if (typeof userString !== "string") return `You entered not a string.`;
+  if (typeof stringLength !== "number" && isNaN(stringLength))
+    return `You entered not a number.`;
+  if (stringLength <= userString.length) {
+    return userString.substring(0, stringLength);
   }
-  if (stringLength === null || stringLength < 1 || isNaN(stringLength)) {
-    return console.log(
-      `You need to enter a some number, that must be greater, than a zero.`
-    );
+  if (!char || (typeof char !== "string" && char.length !== 1))
+    return `You entered not a symbol.`;
+  if (typeof isAddChar !== "boolean") return `You entered not a boolean.`;
+
+  let amountOfChars = "";
+  for (let i = userString.length; i < stringLength; i++) {
+    amountOfChars += char;
   }
-  if (isAddChar === null) {
-    return console.log(`You need to enter a boolean value.`);
-  }
-  if (stringLength > userString.length) {
-    if (!char) {
-      return console.log(
-        `There isn't a char or you need to enter a some char.`
-      );
-    } else {
-      isAddChar
-        ? console.log(userString.padEnd(stringLength, char))
-        : console.log(userString.padStart(stringLength, char));
-    }
-  } else if (stringLength <= userString.length) {
-    console.log(userString.substr(0, stringLength));
-  }
+  return isAddChar ? userString + amountOfChars : amountOfChars + userString;
 }
 
-const result = padString("hello", 2);
+console.log(padString("hello", 8, "*"));
+console.log(padString("hello", 6, "*", false));
+console.log(padString("hello", 2));
