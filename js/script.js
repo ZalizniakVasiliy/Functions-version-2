@@ -5,7 +5,7 @@ function padString(userString, stringLength, char, isAddChar = true) {
   if (stringLength <= userString.length) {
     return userString.substring(0, stringLength);
   }
-  if (!char || (typeof char !== "string" && char.length !== 1))
+  if (!char || typeof char !== "string" || char.length !== 1)
     return `You entered not a symbol.`;
   if (typeof isAddChar !== "boolean") return `You entered not a boolean.`;
 
